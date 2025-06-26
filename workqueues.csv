@@ -1,0 +1,2 @@
+workqueueid,name,description,inputSchema,keyValue,priority,status,tags
+aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee,add-workqueue-item,Add item to Workqueue,"{""type"":""object"",""properties"":{""name"":{""type"":""string"",""description"":""Full name""},""email"":{""type"":""string"",""description"":""email address""}},""required"":[""name"",""value""]}",,,,
