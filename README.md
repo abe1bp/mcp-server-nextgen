@@ -18,8 +18,8 @@ This section helps you set up and run an MCP-compatible server that interacts wi
 
 ### 🔧 Prerequisites
 
-- Python 3.9 or later
-- `pip` or `uv` (recommended) package manager
+- Python 3.10 or later
+- `uv` (recommended) package manager
 - MCP-compatible client (e.g., Claude Desktop)
 - SS&C Next Generation Environment([Japanese](https://www.blueprism.com/japan/products/next-generation/)/[English](https://www.blueprism.com/products/next-generation/))
 ---
@@ -46,27 +46,8 @@ When combining with automated processing, it is necessary to check the following
 3. **Prepare the project directory**
 
 ```bash
-git clone https://github.com/your-org/mcp-blueprism-server.git
-cd mcp-blueprism-server
-```
-
-4. **Install dependencies**
-
-```bash
-pip install mcp aiohttp requests requests_oauthlib pydantic
-```
-
-Or use `pyproject.toml` with `uv` or `hatch`:
-
-```toml
-[project]
-dependencies = [
-  "aiohttp",
-  "mcp[cli]",
-  "oauthlib",
-  "requests",
-  "requests-oauthlib",
-]
+git clone https://github.com/abe1bp/mcp-server-nextgen.git
+cd mcp-server-nextgen
 ```
 ---
 
@@ -81,22 +62,25 @@ To connect Claude Desktop to your server, add:
       "command": "uv",
       "args": [
         "--directory",
-        "folder path",
+        "{folder path}",
         "run",
         "mcp-server-nextgen"
       ],
       "env": {
-        "OAUTH_CLIENT_ID": "your-client-id",
-        "OAUTH_CLIENT_SECRET": "your-client-secret",
-        "OAUTH_TOKEN_URL": "https://your-auth-server/token",
-        "BASE_URL": "https://your-domain.example.com/api/rpa/rest/v1"
+        "OAUTH_CLIENT_ID": "{your-client-id}",
+        "OAUTH_CLIENT_SECRET": "{your-client-secret}",
+        "OAUTH_TOKEN_URL": "https://{tenant-domain}/realms/{tenant-id}/protocol/openid-connect/token",
+        "BASE_URL": "https://{tenant-domain}/regions/{region}/api/rpa/rest/v1"
       }
     }
   }
 }
 ```
-Cconfigure the Client ID and Secret of the Service Account created in Step 1 of the Installation Steps.
-For each URL, please refer to the links provided below.
+{folder path} is the folder prepared in Prepare the project directory.
+
+Cconfigure the {your-client-id} and {your-client-secret} of the Service Account created in Step 1 of the Installation Steps.
+
+For each URL parameters, please refer to the links provided below.
 [**Next Generation REST API**](https://docs.blueprism.com/en-US/bundle/next-generation/page/rest-api.htm)
 Then restart Claude Desktop and select `mcp-server-nextgen`.
 
